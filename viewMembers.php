@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	//$currentpage="View Employees"; 
+	//$currentpage="View Members"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,12 +81,7 @@
                                         echo "<td>" . $row['fname'] . "</td>";
                                         echo "<td>" . $row['lname'] . "</td>";
                                         echo "<td>" . $row['Title'] . "</td>";
-                                        // echo "<td>";
-                                        //     echo "<a href='viewProjects.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Projects' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                                        //     echo "<a href='updateEmployee.php?Ssn=". $row['Ssn'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                        //     echo "<a href='deleteEmployee.php?Ssn=". $row['Ssn'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-										// 	echo "<a href='viewDependents.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Dependents' data-toggle='tooltip'><span class='glyphicon glyphicon-user'></span></a>";
-                                        // echo "</td>";
+
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";                            
@@ -100,6 +95,7 @@
                         echo "ERROR: Could not able to execute $sql. <br>" . mysqli_error($link);
                     }
                     ?>
+                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
 
 </body>

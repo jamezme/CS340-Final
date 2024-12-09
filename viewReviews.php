@@ -68,7 +68,7 @@ if(isset($_SESSION["Book_id"]) ){
         if(mysqli_stmt_execute($stmt)){
             $result = mysqli_stmt_get_result($stmt);
     
-			echo"<h4> Reviews for ".$Title." &nbsp      Book_id =".$param_Book_id."</h4><p>";
+			echo"<h4> Reviews for ".$Title." &nbsp      Book_id = ".$param_Book_id."</h4><p>";
 			if(mysqli_num_rows($result) > 0){
 				echo "<table class='table table-bordered table-striped'>";
                     echo "<thead>";

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	//$currentpage="View Books"; 
+	//$currentpage="View Authors"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,53 +43,41 @@
             <div class="row">
                 <div class="col-md-12">
 		    <div class="page-header clearfix">
-		       <h2 class="pull-left">Library Book Details</h2>
-                        <a href="viewMembers.php" class="btn btn-success pull-right">View Members</a>
-                        <a href="viewAuthors.php" class="btn btn-success pull-right">View Authors</a>
+		       <h2 class="pull-left">Author Details</h2>
+                        <a href="createAuthor.php" class="btn btn-success pull-right">Add New Author (TODO)</a>
                     </div>
                     <?php
                     // Include config file
                     require_once "config.php";
                     
-                    // Attempt select all book query execution
-                    $sql = "SELECT BOOK.Book_id, BOOK.title, AUTHOR.Author_fname, AUTHOR.Author_lname, BOOK.Genre, BOOK.Length, BOOK.Rating, IF(CHECK_OUT.Return_date IS NULL, 'YES', 'NO') AS Available
-                            FROM BOOK
-                            LEFT JOIN CHECK_OUT ON BOOK.Book_id = CHECK_OUT.Book_id
-                            LEFT JOIN BOOK_AUTHOR ON BOOK.Book_id = BOOK_AUTHOR.Book_id
-                            LEFT JOIN AUTHOR ON BOOK_AUTHOR.Author_id = AUTHOR.Author_id";
+                    // Attempt select all employee query execution
+					// *****
+					// Insert your function for Salary Level
+					/*
+						$sql = "SELECT Ssn,Fname,Lname,Salary, Address, Bdate, PayLevel(Ssn) as Level, Super_ssn, Dno
+							FROM EMPLOYEE";
+					*/
+                    $sql = "SELECT AUTHOR.Author_id, AUTHOR.Author_fname, AUTHOR.Author_lname, AUTHOR.Rating
+                            FROM AUTHOR";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th width=8%>Book ID</th>";
-                                        echo "<th width=10%>Title</th>";
-                                        echo "<th width=10%>Author First Name</th>";
-                                        echo "<th width=10%>Author Last Name</th>";
-                                        echo "<th width=10%>Genre</th>";
-                                        echo "<th width=10%>Length</th>";
+                                        echo "<th width=8%>Author ID</th>";
+                                        echo "<th width=10%>First Name</th>";
+                                        echo "<th width=10%>Last Name</th>";
                                         echo "<th width=10%>Rating</th>";
-                                        echo "<th width=10%>Available</th>";
-                                        echo "<th width=10%>Actions</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['Book_id'] . "</td>";
-                                        echo "<td>" . $row['title'] . "</td>";
+                                        echo "<td>" . $row['Author_id'] . "</td>";
                                         echo "<td>" . $row['Author_fname'] . "</td>";
                                         echo "<td>" . $row['Author_lname'] . "</td>";
-                                        echo "<td>" . $row['Genre'] . "</td>";
-                                        echo "<td>" . $row['Length'] . "</td>";
                                         echo "<td>" . $row['Rating'] . "</td>";
-                                        echo "<td>" . $row['Available'] . "</td>";
-                                        echo "<td>";
-                                            echo "<a href='viewReviews.php?Book_id=". $row['Book_id']."&title=".$row['title']."' title='View Reviews' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                                        //     echo "<a href='updateEmployee.php?Ssn=". $row['Ssn'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                        //     echo "<a href='deleteEmployee.php?Ssn=". $row['Ssn'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-										// 	echo "<a href='viewDependents.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Dependents' data-toggle='tooltip'><span class='glyphicon glyphicon-user'></span></a>";
-                                        echo "</td>";
+
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";                            
@@ -103,6 +91,7 @@
                         echo "ERROR: Could not able to execute $sql. <br>" . mysqli_error($link);
                     }
                     ?>
+                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
 
 </body>
