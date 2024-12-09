@@ -72,7 +72,6 @@
                                         echo "<th width=10%>First Name</th>";
                                         echo "<th width=10%>Last Name</th>";
                                         echo "<th width=10%>Checked Out</th>";
-                                        echo "<th width=10%>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";

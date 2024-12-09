@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	//$currentpage="View Employees"; 
+	//$currentpage="View Books"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,20 +43,14 @@
             <div class="row">
                 <div class="col-md-12">
 		    <div class="page-header clearfix">
-		       <h2 class="pull-left">Book Details</h2>
-                        <a href="displayMembers.php" class="btn btn-success pull-right">View Members (TODO)</a>
+		       <h2 class="pull-left">Library Book Details</h2>
+                        <a href="viewMembers.php" class="btn btn-success pull-right">View Members</a>
                     </div>
                     <?php
                     // Include config file
                     require_once "config.php";
                     
-                    // Attempt select all employee query execution
-					// *****
-					// Insert your function for Salary Level
-					/*
-						$sql = "SELECT Ssn,Fname,Lname,Salary, Address, Bdate, PayLevel(Ssn) as Level, Super_ssn, Dno
-							FROM EMPLOYEE";
-					*/
+                    // Attempt select all book query execution
                     $sql = "SELECT BOOK.Book_id, BOOK.title, AUTHOR.Author_fname, AUTHOR.Author_lname, BOOK.Genre, BOOK.Length, BOOK.Rating, IF(CHECK_OUT.Return_date IS NULL, 'YES', 'NO') AS Available
                             FROM BOOK
                             LEFT JOIN CHECK_OUT ON BOOK.Book_id = CHECK_OUT.Book_id
@@ -75,6 +69,7 @@
                                         echo "<th width=10%>Length</th>";
                                         echo "<th width=10%>Rating</th>";
                                         echo "<th width=10%>Available</th>";
+                                        echo "<th width=10%>Actions</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -88,12 +83,12 @@
                                         echo "<td>" . $row['Length'] . "</td>";
                                         echo "<td>" . $row['Rating'] . "</td>";
                                         echo "<td>" . $row['Available'] . "</td>";
-                                        // echo "<td>";
-                                        //     echo "<a href='viewProjects.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Projects' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                                        echo "<td>";
+                                            echo "<a href='viewReviews.php?Book_id=". $row['Book_id']."&title=".$row['title']."' title='View Reviews' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                                         //     echo "<a href='updateEmployee.php?Ssn=". $row['Ssn'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                                         //     echo "<a href='deleteEmployee.php?Ssn=". $row['Ssn'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
 										// 	echo "<a href='viewDependents.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Dependents' data-toggle='tooltip'><span class='glyphicon glyphicon-user'></span></a>";
-                                        // echo "</td>";
+                                        echo "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";                            
