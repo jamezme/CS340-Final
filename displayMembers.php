@@ -43,8 +43,8 @@
             <div class="row">
                 <div class="col-md-12">
 		    <div class="page-header clearfix">
-		       <h2 class="pull-left">Book Details</h2>
-                        <a href="displayMembers.php" class="btn btn-success pull-right">View Members (TODO)</a>
+		       <h2 class="pull-left">Member Details</h2>
+                        <a href="createEmployee.php" class="btn btn-success pull-right">Add New Member (TODO)</a>
                     </div>
                     <?php
                     // Include config file
@@ -57,37 +57,31 @@
 						$sql = "SELECT Ssn,Fname,Lname,Salary, Address, Bdate, PayLevel(Ssn) as Level, Super_ssn, Dno
 							FROM EMPLOYEE";
 					*/
-                    $sql = "SELECT BOOK.Book_id, BOOK.title, AUTHOR.Author_fname, AUTHOR.Author_lname, BOOK.Genre, BOOK.Length, BOOK.Rating, IF(CHECK_OUT.Return_date IS NULL, 'YES', 'NO') AS Available
-                            FROM BOOK
-                            LEFT JOIN CHECK_OUT ON BOOK.Book_id = CHECK_OUT.Book_id
-                            LEFT JOIN BOOK_AUTHOR ON BOOK.Book_id = BOOK_AUTHOR.Book_id
-                            LEFT JOIN AUTHOR ON BOOK_AUTHOR.Author_id = AUTHOR.Author_id";
+                    $sql = "SELECT MEMBER.Member_id, MEMBER.fname, MEMBER.lname, checked_out.Title
+							FROM MEMBER
+                            LEFT JOIN CHECK_OUT ON MEMBER.Member_id = CHECK_OUT.Member_id
+                            LEFT JOIN (SELECT BOOK.Title, BOOK.Book_id FROM BOOK NATURAL JOIN CHECK_OUT WHERE Return_date IS NULL)
+                            AS checked_out
+                            ON checked_out.Book_id = CHECK_OUT.Book_id";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th width=8%>Book ID</th>";
-                                        echo "<th width=10%>Title</th>";
-                                        echo "<th width=10%>Author First Name</th>";
-                                        echo "<th width=10%>Author Last Name</th>";
-                                        echo "<th width=10%>Genre</th>";
-                                        echo "<th width=10%>Length</th>";
-                                        echo "<th width=10%>Rating</th>";
-                                        echo "<th width=10%>Available</th>";
+                                        echo "<th width=8%>Member_id</th>";
+                                        echo "<th width=10%>First Name</th>";
+                                        echo "<th width=10%>Last Name</th>";
+                                        echo "<th width=10%>Checked Out</th>";
+                                        echo "<th width=10%>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['Book_id'] . "</td>";
-                                        echo "<td>" . $row['title'] . "</td>";
-                                        echo "<td>" . $row['Author_fname'] . "</td>";
-                                        echo "<td>" . $row['Author_lname'] . "</td>";
-                                        echo "<td>" . $row['Genre'] . "</td>";
-                                        echo "<td>" . $row['Length'] . "</td>";
-                                        echo "<td>" . $row['Rating'] . "</td>";
-                                        echo "<td>" . $row['Available'] . "</td>";
+                                        echo "<td>" . $row['Member_id'] . "</td>";
+                                        echo "<td>" . $row['fname'] . "</td>";
+                                        echo "<td>" . $row['lname'] . "</td>";
+                                        echo "<td>" . $row['Title'] . "</td>";
                                         // echo "<td>";
                                         //     echo "<a href='viewProjects.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Projects' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                                         //     echo "<a href='updateEmployee.php?Ssn=". $row['Ssn'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
