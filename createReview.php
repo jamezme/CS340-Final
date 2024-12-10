@@ -6,8 +6,8 @@ if(isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))){
     $_SESSION["Book_id"] = $_GET["Book_id"];
 }
 
-if(isset($_GET["title"]) && !empty(trim($_GET["title"]))){
-    $_SESSION["Title"] = $_GET["title"];
+if(isset($_GET["Title"]) && !empty(trim($_GET["Title"]))){
+    $_SESSION["Title"] = $_GET["Title"];
 }
 
 $Reviewed_book = isset($_SESSION["Book_id"]) ? $_SESSION["Book_id"] : '';
