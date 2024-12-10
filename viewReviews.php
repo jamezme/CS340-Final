@@ -1,7 +1,15 @@
 <?php
 	session_start();
     // Include config file
+    // Check existence of id parameter before processing further
     require_once "config.php";
+    if(isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))){
+        $_SESSION["Book_id"] = $_GET["Book_id"];
+    }
+    if(isset($_GET["title"]) && !empty(trim($_GET["title"]))){
+        $_SESSION["title"] = $_GET["title"];
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,19 +44,16 @@
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="pull-left">View Reviews</h2>
-						<?php echo "<a href='createReview.php?Book_id=". $row['Book_id']."&title=".$row['title']."' class='btn btn-success pull-right'>Add Review</a> "?>
+						<?php 
+                            // Include book_id and title in url
+                                $book_id = $_SESSION["Book_id"];
+                                $title = $_SESSION["title"];
+                                echo "<a href='createReview.php?Book_id=$book_id&title=$title' class='btn btn-success pull-right'>Add Review</a>";
+                        ?>
                     </div>
 <?php
 
-// Check existence of id parameter before processing further
-if(isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))){
-	$_SESSION["Book_id"] = $_GET["Book_id"];
-}
-if(isset($_GET["title"]) && !empty(trim($_GET["title"]))){
-	$_SESSION["title"] = $_GET["title"];
-}
-
-if(isset($_SESSION["Book_id"]) ){
+if(isset($_SESSION["Book_id"]) && isset($_SESSION["title"])){
 	
     // Prepare a select statement
     $sql = "SELECT MEMBER.fname, REVIEW.Rating, REVIEW.Subject, REVIEW.Description
