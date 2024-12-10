@@ -44,7 +44,6 @@
                 <div class="col-md-12">
 		    <div class="page-header clearfix">
 		       <h2 class="pull-left">Author Details</h2>
-                        <a href="createAuthor.php" class="btn btn-success pull-right">Add New Author (TODO)</a>
                     </div>
                     <?php
                     // Include config file

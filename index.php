@@ -53,11 +53,11 @@
                     require_once "config.php";
                     
                     // Attempt select all book query execution
-                    $sql = "SELECT BOOK.Book_id, BOOK.title, AUTHOR.Author_fname, AUTHOR.Author_lname, BOOK.Genre, BOOK.Length, BOOK.Rating, IF(checked_out.Return_date IS NULL, 'YES', 'NO') AS Available
+                    $sql = "SELECT BOOK.Book_id, BOOK.title, AUTHOR.Author_fname, AUTHOR.Author_lname, BOOK.Genre, BOOK.Length, BOOK.Rating, IF(STRCMP(checked_out.returned, 'NO') = 0, 'NO', 'YES') AS Available
                             FROM BOOK
-                            LEFT JOIN (SELECT CHECK_OUT.Book_id, CHECK_OUT.Return_date FROM CHECK_OUT WHERE Return_date IS NULL) as checked_out ON BOOK.Book_id = checked_out.Book_id
+                            LEFT JOIN (SELECT CHECK_OUT.Book_id, IF(CHECK_OUT.Return_date IS NULL, 'NO', 'YES') AS returned FROM CHECK_OUT WHERE Return_date IS NULL) as checked_out ON BOOK.Book_id = checked_out.Book_id
                             LEFT JOIN BOOK_AUTHOR ON BOOK.Book_id = BOOK_AUTHOR.Book_id
-                            LEFT JOIN AUTHOR ON BOOK_AUTHOR.Author_id = AUTHOR.Author_id;";
+                            LEFT JOIN AUTHOR ON BOOK_AUTHOR.Author_id = AUTHOR.Author_id";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";

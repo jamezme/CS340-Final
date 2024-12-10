@@ -43,8 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				    header("location: index.php");
 					exit();
             } else{
-                echo "<center><h4>Error while creating new employee</h4></center>";
-				$Member_id_err = "Enter a unique Ssn.";
+                echo "<center><h4>Error while creating new member</h4></center>";
             }
         }
          

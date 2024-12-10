@@ -80,6 +80,7 @@
                                         echo "<td>";
                                             echo "<a href='updateMember.php?Member_id=". $row['Member_id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                                             echo "<a href='deleteMember.php?Member_id=". $row['Member_id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+                                            echo "<a href='checkoutBook.php?Member_id=". $row['Member_id'] ."' title='Checkout Book' data-toggle='tooltip'><span class='glyphicon glyphicon-book'></span></a>";
                                         echo "</td>";
 
                                     echo "</tr>";
