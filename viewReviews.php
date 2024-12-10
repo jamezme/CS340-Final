@@ -1,15 +1,14 @@
 <?php
 	session_start();
     // Include config file
-    // Check existence of id parameter before processing further
     require_once "config.php";
+    // Check existence of id parameter before processing further
     if(isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))){
         $_SESSION["Book_id"] = $_GET["Book_id"];
     }
     if(isset($_GET["title"]) && !empty(trim($_GET["title"]))){
         $_SESSION["title"] = $_GET["title"];
     }
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
