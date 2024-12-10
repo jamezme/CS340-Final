@@ -1,22 +1,15 @@
 <?php
-session_start();
+	session_start();
+	ob_start();
+	$Reviewed_book = $_SESSION["Book_id"];
+	$Reviewed_book_title = $_SESSION["title"];
+	// Include config file
+	require_once "config.php";
 
-// Get the book_id and title and store them in variables
-if(isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))){
-    $_SESSION["Book_id"] = $_GET["Book_id"];
-}
+?>
 
-if(isset($_GET["title"]) && !empty(trim($_GET["title"]))){
-    $_SESSION["title"] = $_GET["title"];
-}
+<?php
 
-$Reviewed_book = isset($_SESSION["Book_id"]) ? $_SESSION["Book_id"] : '';
-$Reviewed_book_title = isset($_SESSION["title"]) ? $_SESSION["title"] : '';
-
-
-// Include config file
-require_once "config.php";
- 
 // Define variables and initialize with empty values
 $Reviewer = $Rating = $Subject = $Description ="" ;
 $Reviewer_err = $Rating_err =  $Subject_err =$Description_err= "" ;
@@ -44,7 +37,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 } else {
                     $Reviewer_err = "No member found with this ID.";
                 }
-                
             }
             // Close SELECT statement
             mysqli_stmt_close($stmt);
@@ -133,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="col-md-12">
                     <div class="page-header">
                         <h2>Add Review</h2>
-						<?php echo "<h3> For ".$Reviewed_book_title." </h3>"?> 
+						<h3> For <?php echo $Reviewed_book_title; ?> </h3>
                     </div>
                     
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
