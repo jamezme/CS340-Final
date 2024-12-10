@@ -50,13 +50,8 @@
                     // Include config file
                     require_once "config.php";
                     
-                    // Attempt select all employee query execution
-					// *****
-					// Insert your function for Salary Level
-					/*
-						$sql = "SELECT Ssn,Fname,Lname,Salary, Address, Bdate, PayLevel(Ssn) as Level, Super_ssn, Dno
-							FROM EMPLOYEE";
-					*/
+                    // Attempt select all author query execution
+
                     $sql = "SELECT AUTHOR.Author_id, AUTHOR.Author_fname, AUTHOR.Author_lname, AUTHOR.Rating
                             FROM AUTHOR";
                     if($result = mysqli_query($link, $sql)){

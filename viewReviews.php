@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Projects</title>
+    <title>View Reviews</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
@@ -56,7 +56,6 @@ if(isset($_SESSION["Book_id"]) ){
             LEFT JOIN MEMBER ON REVIEW.Reviewer = MEMBER.Member_id
             WHERE REVIEW.Reviewed_book = ?";
 
-	//$sql = "SELECT Essn, Pno, Hours From WORKS_ON WHERE Essn = ? ";   
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "s", $param_Book_id);      

@@ -46,6 +46,7 @@
 		       <h2 class="pull-left">Library Book Details</h2>
                         <a href="viewMembers.php" class="btn btn-success pull-right">View Members</a>
                         <a href="viewAuthors.php" class="btn btn-success pull-right">View Authors</a>
+                        <a href='addBook.php' class="btn btn-success pull-right">Add a Book</a>
                     </div>
                     <?php
                     // Include config file
@@ -86,9 +87,8 @@
                                         echo "<td>" . $row['Available'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='viewReviews.php?Book_id=". $row['Book_id']."&title=".$row['title']."' title='View Reviews' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                                        //     echo "<a href='updateEmployee.php?Ssn=". $row['Ssn'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                        //     echo "<a href='deleteEmployee.php?Ssn=". $row['Ssn'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-										// 	echo "<a href='viewDependents.php?Ssn=". $row['Ssn']."&Lname=".$row['Lname']."' title='View Dependents' data-toggle='tooltip'><span class='glyphicon glyphicon-user'></span></a>";
+                                            echo "<a href='updateBook.php?Book_id=". $row['Book_id'] ."' title='Update Record (TODO)' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                            echo "<a href='deleteBook.php?Book_id=". $row['Book_id'] ."' title='Delete Record (TODO)' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
