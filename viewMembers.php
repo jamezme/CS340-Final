@@ -44,7 +44,7 @@
                 <div class="col-md-12">
 		    <div class="page-header clearfix">
 		       <h2 class="pull-left">Member Details</h2>
-                        <a href="createEmployee.php" class="btn btn-success pull-right">Add New Member (TODO)</a>
+                        <a href="createMember.php" class="btn btn-success pull-right">Add New Member</a>
                     </div>
                     <?php
                     // Include config file
@@ -78,7 +78,7 @@
                                         echo "<td>" . $row['lname'] . "</td>";
                                         echo "<td>" . $row['Title'] . "</td>";
                                         echo "<td>";
-                                            // echo "<a href='updateMember.php?Member_id=". $row['Member_id'] ."' title='Update Record (TODO)' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                            echo "<a href='updateMember.php?Member_id=". $row['Member_id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                                             echo "<a href='deleteMember.php?Member_id=". $row['Member_id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                                         echo "</td>";
 
