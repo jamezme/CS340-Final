@@ -50,13 +50,8 @@
                     // Include config file
                     require_once "config.php";
                     
-                    // Attempt select all employee query execution
-					// *****
-					// Insert your function for Salary Level
-					/*
-						$sql = "SELECT Ssn,Fname,Lname,Salary, Address, Bdate, PayLevel(Ssn) as Level, Super_ssn, Dno
-							FROM EMPLOYEE";
-					*/
+                    // Attempt select all member query execution
+					
                     $sql = "SELECT MEMBER.Member_id, MEMBER.fname, MEMBER.lname, checked_out.Title
 							FROM MEMBER
                             LEFT JOIN CHECK_OUT ON MEMBER.Member_id = CHECK_OUT.Member_id
@@ -72,6 +67,7 @@
                                         echo "<th width=10%>First Name</th>";
                                         echo "<th width=10%>Last Name</th>";
                                         echo "<th width=10%>Checked Out</th>";
+                                        echo "<th width=10%>Actions</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -81,6 +77,10 @@
                                         echo "<td>" . $row['fname'] . "</td>";
                                         echo "<td>" . $row['lname'] . "</td>";
                                         echo "<td>" . $row['Title'] . "</td>";
+                                        echo "<td>";
+                                            // echo "<a href='updateMember.php?Member_id=". $row['Member_id'] ."' title='Update Record (TODO)' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                            echo "<a href='deleteMember.php?Member_id=". $row['Member_id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+                                        echo "</td>";
 
                                     echo "</tr>";
                                 }
