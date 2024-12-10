@@ -6,12 +6,12 @@ if(isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))){
     $_SESSION["Book_id"] = $_GET["Book_id"];
 }
 
-if(isset($_GET["Title"]) && !empty(trim($_GET["Title"]))){
-    $_SESSION["Title"] = $_GET["Title"];
+if(isset($_GET["title"]) && !empty(trim($_GET["title"]))){
+    $_SESSION["title"] = $_GET["title"];
 }
 
 $Reviewed_book = isset($_SESSION["Book_id"]) ? $_SESSION["Book_id"] : '';
-$Reviewed_book_title = isset($_SESSION["Title"]) ? $_SESSION["Title"] : '';
+$Reviewed_book_title = isset($_SESSION["title"]) ? $_SESSION["title"] : '';
 
 
 // Include config file
@@ -133,7 +133,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="col-md-12">
                     <div class="page-header">
                         <h2>Add Review</h2>
-						<h3> For <?php echo $Reviewed_book_title; ?> </h3>
+						<?php echo "<h3> For ".$Reviewed_book_title." </h3>"?> 
                     </div>
                     
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

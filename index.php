@@ -46,7 +46,7 @@
 		       <h2 class="pull-left">Library Book Details</h2>
                         <a href="viewMembers.php" class="btn btn-success pull-right">View Members</a>
                         <a href="viewAuthors.php" class="btn btn-success pull-right">View Authors</a>
-                        <a href='addBook.php' class="btn btn-success pull-right">Add a Book</a>
+                        <a href='createBook.php' class="btn btn-success pull-right">Add a Book</a>
                     </div>
                     <?php
                     // Include config file

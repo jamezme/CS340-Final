@@ -36,7 +36,7 @@
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="pull-left">View Reviews</h2>
-						<a href="addReview.php" class="btn btn-success pull-right">Add Review (TODO)</a>
+						<?php echo "<a href='createReview.php?Book_id=". $row['Book_id']."&title=".$row['title']."' class='btn btn-success pull-right'>Add Review (TODO)</a> "?>
                     </div>
 <?php
 
