@@ -49,38 +49,45 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Get the author_id if author already exists in database
         $sql = "SELECT author_id FROM AUTHOR WHERE LOWER(author_fname) = LOWER(?) AND LOWER(author_lname) = LOWER(?)";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $Author_fname, $Author_lname);
+if ($stmt = mysqli_prepare($link, $sql)) {
+    // Bind variables to prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "ss", $Author_fname, $Author_lname);
 
-            // Execute the SELECT statement
-            if (mysqli_stmt_execute($stmt)) {
-                $result = mysqli_stmt_get_result($stmt);
+    // Execute the SELECT statement
+    if (mysqli_stmt_execute($stmt)) {
+        $result = mysqli_stmt_get_result($stmt);
 
-                // If the author exists in the database, get the result
-                if (mysqli_num_rows($result) > 0) {
-                    // Get the author ID from the result
-                    $row = mysqli_fetch_assoc($result);
-                    $Author_id = $row['Author_id'];
+        // If the author exists in the database, get the result
+        if (mysqli_num_rows($result) > 0) {
+            // Get the author_id from the result
+            $row = mysqli_fetch_assoc($result);
+            $Author_id = $row['author_id'];
+        } else {
+            // If author doesn't already exist, add to database
+            $sql_add_author = "INSERT INTO AUTHOR (Author_fname, Author_lname) VALUES (?, ?)";
+            if ($stmt_add = mysqli_prepare($link, $sql_add_author)) {
+                // Bind variables to prepared statement
+                mysqli_stmt_bind_param($stmt_add, "ss", $Author_fname, $Author_lname);
+                if (mysqli_stmt_execute($stmt_add)) {
+                    // Get the new Author_id after adding
+                    $Author_id = mysqli_insert_id($link);
                 } else {
-                    // If author doesn't already exist, add to database
-                    $sql_add_author = "INSERT INTO AUTHOR (Author_fname, Author_lname) VALUES (?, ?)";
-                    if ($stmt_add = mysqli_prepare($link, $sql_add_author)) {
-                        // Bind variables to prepared statement
-                        mysqli_stmt_bind_param($stmt_add, "ss", $Author_fname, $Author_lname);
-                        if (mysqli_stmt_execute($stmt_add)) {
-                            // Get the new author_id
-                            $Author_id = mysqli_insert_id($link); 
-                        } else {
-                            echo "<center><h4>Error adding author.</h4></center>";
-                            exit();
-                        }
-                    }
+                    echo "<center><h4>Error adding author.</h4></center>";
+                    exit();
                 }
             }
-        // Close SELECT statement
-        mysqli_stmt_close($stmt);
-        } 
+        }
+    } else {
+        
+        exit();
+    }
+
+    // Close the SELECT statement
+    mysqli_stmt_close($stmt);
+} else {
+    echo "Error preparing SELECT statement: " . mysqli_error($link) . "<br>";  // Debugging output
+    exit();
+}
 
         // Add the new book into the BOOK table
         $sql_add_book = "INSERT INTO BOOK (Title, Genre, Length) VALUES (?, ?, ?)";
