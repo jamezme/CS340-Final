@@ -77,8 +77,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     }
                 }
-            } else {
-                echo "Error executing SELECT query: " . mysqli_error($link) . "<br>";
             }
         // Close SELECT statement
         mysqli_stmt_close($stmt);
