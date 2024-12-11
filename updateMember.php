@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($link);
 } else {
 
-    // Check existence of sID parameter before processing further
+    // Check existence of Memhber_id parameter before processing further
 	// Form default values
 
 	if(isset($_GET["Member_id"]) && !empty(trim($_GET["Member_id"]))){

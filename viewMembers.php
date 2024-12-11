@@ -52,12 +52,11 @@
                     
                     // Attempt select all member query execution
 					
-                    $sql = "SELECT MEMBER.Member_id, MEMBER.fname, MEMBER.lname, checked_out.Title
-							FROM MEMBER
-                            LEFT JOIN CHECK_OUT ON MEMBER.Member_id = CHECK_OUT.Member_id
-                            LEFT JOIN (SELECT BOOK.Title, BOOK.Book_id FROM BOOK NATURAL JOIN CHECK_OUT WHERE Return_date IS NULL)
+                    $sql = "SELECT MEMBER.Member_id, MEMBER.fname, MEMBER.lname, checked_out.Title, checked_out.Book_id
+                            FROM MEMBER
+                            LEFT JOIN (SELECT CHECK_OUT.Member_id, BOOK.Title, BOOK.Book_id FROM BOOK NATURAL JOIN CHECK_OUT WHERE Return_date IS NULL)
                             AS checked_out
-                            ON checked_out.Book_id = CHECK_OUT.Book_id";
+                            ON checked_out.Member_id = MEMBER.Member_id";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";
@@ -81,6 +80,7 @@
                                             echo "<a href='updateMember.php?Member_id=". $row['Member_id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                                             echo "<a href='deleteMember.php?Member_id=". $row['Member_id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                                             echo "<a href='checkoutBook.php?Member_id=". $row['Member_id'] ."' title='Checkout Book' data-toggle='tooltip'><span class='glyphicon glyphicon-book'></span></a>";
+                                            echo "<a href='returnBook.php?Member_id=". $row['Member_id'] ."&Book_id=". $row['Book_id'] ."' title='Return Book' data-toggle='tooltip'><span class='glyphicon glyphicon-log-in'></span></a>";
                                         echo "</td>";
 
                                     echo "</tr>";
