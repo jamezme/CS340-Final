@@ -21,11 +21,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($Reviewer)){
         $Reviewer_err = "Please enter a member ID number.";
     } else {
-        // Check if the member_id exists in the database
-        $sql = "SELECT Member_id FROM MEMBER WHERE Member_id = ?";
+        // Check if the member has checked out the book before
+        $sql = "SELECT Member_id FROM CHECK_OUT WHERE Member_id = ? AND Book_id = ?";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to prepared statement
-            mysqli_stmt_bind_param($stmt, "i", $Reviewer);
+            mysqli_stmt_bind_param($stmt, "ii", $Reviewer, $Reviewed_book);
             // Execute SELECT statement
             if (mysqli_stmt_execute($stmt)) {
                 // Get the result and check if member was found
