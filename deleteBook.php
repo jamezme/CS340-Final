@@ -4,8 +4,8 @@ if (isset($_GET["Book_id"]) && !empty(trim($_GET["Book_id"]))) {
     $_SESSION["Book_id"] = $_GET["Book_id"];
 }
 
-if (isset($_GET["Title"]) && !empty(trim($_GET["Title"]))) {
-    $_SESSION["Title"] = $_GET["Title"];
+if (isset($_GET["title"]) && !empty(trim($_GET["title"]))) {
+    $_SESSION["title"] = $_GET["title"];
 }
 
 // Include config file
@@ -76,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger fade in">
                             <input type="hidden" name="Book_id" value="<?php echo ($_SESSION["Book_id"]); ?>"/>
-                            <input type="hidden" name="Title" value="<?php echo ($_SESSION["Title"]); ?>"/>
-                            <p>Are you sure you want to delete the book titled "<?php echo ($_SESSION["Title"]); ?>" with ID <?php echo ($_SESSION["Book_id"]); ?>?</p><br>
+                            <input type="hidden" name="Title" value="<?php echo ($_SESSION["title"]); ?>"/>
+                            <p>Are you sure you want to delete the book titled "<?php echo ($_SESSION["title"]); ?>" with ID <?php echo ($_SESSION["Book_id"]); ?>?</p><br>
                             <input type="submit" value="Yes" class="btn btn-danger">
                             <a href="index.php" class="btn btn-default">No</a>
                         </div>
