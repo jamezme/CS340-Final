@@ -87,7 +87,7 @@
                                         echo "<td>" . $row['Available'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='viewReviews.php?Book_id=". $row['Book_id']."&title=".$row['title']."' title='View Reviews' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                                            echo "<a href='updateBook.php?Book_id=". $row['Book_id'] ."' title='Update Record (TODO)' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                            echo "<a href='updateBook.php?Book_id=". $row['Book_id']."&title=".$row['title']."' title='Update Book' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                                             echo "<a href='deleteBook.php?Book_id=". $row['Book_id']."&title=".$row['title']."' title='Delete Book' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                                         echo "</td>";
                                     echo "</tr>";
